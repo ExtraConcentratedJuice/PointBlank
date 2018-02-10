@@ -1,0 +1,23 @@
+{
+	"IsEnabled": true,
+	"Name": "PointBlank",
+	"Version": "1.0.0.0",
+	"Assemblies":
+	[
+		{
+			"Path": "/PointBlank.dll",
+			"Role": "Server"
+		}
+	],
+	"Dependencies":
+	[
+		{
+			"Name": "Framework",
+			"Version": "3.23.4.2"
+		},
+		{
+			"Name": "Unturned",
+			"Version": "3.23.4.2"
+		}
+	]
+}

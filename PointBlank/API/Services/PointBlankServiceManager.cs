@@ -14,17 +14,17 @@ namespace PointBlank.API.Services
         /// <summary>
         /// Returns a list of the current running services
         /// </summary>
-        public static string[] RunningServices => Enviroment.services.Where(a => a.Value.Enabled).Select(a => a.Key) as string[];
+        public static string[] RunningServices => Environment.services.Where(a => a.Value.Enabled).Select(a => a.Key) as string[];
 
         /// <summary>
         /// Returns a list of the current stopped services
         /// </summary>
-        public static string[] StoppedServices => Enviroment.services.Where(a => !a.Value.Enabled).Select(a => a.Key) as string[];
+        public static string[] StoppedServices => Environment.services.Where(a => !a.Value.Enabled).Select(a => a.Key) as string[];
 
         /// <summary>
         /// Returns a list of all the current services
         /// </summary>
-        public static string[] AllServices => Enviroment.services.Select(a => a.Key) as string[];
+        public static string[] AllServices => Environment.services.Select(a => a.Key) as string[];
         #endregion
 
         #region Functions
@@ -33,21 +33,21 @@ namespace PointBlank.API.Services
         /// </summary>
         /// <param name="serviceName">The target service name</param>
         /// <returns>If the service was successfully stopped</returns>
-        public static bool StopService(string serviceName) => Enviroment.services[serviceName].Stop();
+        public static bool StopService(string serviceName) => Environment.services[serviceName].Stop();
 
         /// <summary>
         /// Attempts to start a stopped service
         /// </summary>
         /// <param name="serviceName">The target service name</param>
         /// <returns>If the service was successfully started</returns>
-        public static bool StartService(string serviceName) => Enviroment.services[serviceName].Start();
+        public static bool StartService(string serviceName) => Environment.services[serviceName].Start();
 
         /// <summary>
         /// Attempts to get the service by name and return the class
         /// </summary>
         /// <param name="serviceName">The service name to query for</param>
         /// <returns>The service class/instance</returns>
-        public static PointBlankService GetService(string serviceName) => Enviroment.services[serviceName].ServiceClass;
+        public static PointBlankService GetService(string serviceName) => Environment.services[serviceName].ServiceClass;
         #endregion
     }
 }

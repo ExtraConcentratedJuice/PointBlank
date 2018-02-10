@@ -62,7 +62,7 @@ namespace PointBlank.API.Commands
         /// <param name="command">The command to execute</param>
         public static ECommandRunError ExecuteCommand(string command, Player.PointBlankPlayer executor)
         {
-            CM cmd = (CM)Enviroment.services["CommandManager.CommandManager"].ServiceClass;
+            CM cmd = (CM)Environment.services["CommandManager.CommandManager"].ServiceClass;
 
             return cmd.ExecuteCommand(command, executor);
         }

@@ -13,8 +13,8 @@ namespace PointBlank.API
     public static class PointBlankLogging
     {
         #region Info
-        public static readonly string LogPath = Directory.GetCurrentDirectory() + "//PointBlank.log";
-        public static readonly string LogPathPrev = Directory.GetCurrentDirectory() + "//PointBlankOld.log";
+        public static readonly string LogPath = $"{Environment.ServerDirectory}/PointBlankLog.log";
+        public static readonly string LogPathPrev = $"{Environment.ServerDirectory}/PointBlankLog.old";
         #endregion
 
         static PointBlankLogging()
@@ -25,6 +25,7 @@ namespace PointBlank.API
                 File.Move(LogPath, LogPathPrev);
         }
 
+        #region Log
         /// <summary>
         /// Logs text into the logs file and console
         /// </summary>
@@ -44,16 +45,30 @@ namespace PointBlank.API
                 if (asm == "Assembly-CSharp" || asm == "UnityEngine")
                     asm = "Game";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 asm = "Mono";
             }
 
             log = "[LOG] " + asm + " >> " + log;
-            File.AppendAllText(LogPath, log.ToString() + Environment.NewLine);
+            File.AppendAllText(LogPath, log.ToString() + System.Environment.NewLine);
             if (inConsole)
                 PointBlankConsole.WriteLine(log);
         }
+
+        /// <summary>
+        /// Logs an empty line.
+        /// </summary>
+        /// <param name="inConsole">Should the text be printed into the console</param>
+        public static void Log(bool inConsole = true)
+        {
+            StackTrace stack = new StackTrace(false);
+
+            File.AppendAllText(LogPath, System.Environment.NewLine);
+            if (inConsole)
+                PointBlankConsole.WriteLine(System.Environment.NewLine);
+        }
+        #endregion
 
         /// <summary>
         /// Logs an error into the logs file and console
@@ -76,14 +91,14 @@ namespace PointBlank.API
                 if (asm == "Assembly-CSharp" || asm == "UnityEngine")
                     asm = "Game";
             }
-            catch (Exception exc)
+            catch (Exception)
             {
                 asm = "Mono";
             }
 
             log = "[ERROR] " + asm + " >> " + log;
-            File.AppendAllText(LogPath, log.ToString() + Environment.NewLine);
-            File.AppendAllText(LogPath, ex.ToString() + Environment.NewLine);
+            File.AppendAllText(LogPath, log.ToString() + System.Environment.NewLine);
+            File.AppendAllText(LogPath, ex.ToString() + System.Environment.NewLine);
             if (inConsole)
                 PointBlankConsole.WriteLine(log, ConsoleColor.Red);
             if (exInConsole)
@@ -109,13 +124,13 @@ namespace PointBlank.API
                 if (asm == "Assembly-CSharp" || asm == "UnityEngine")
                     asm = "Game";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 asm = "Mono";
             }
 
             log = "[WARNING] " + asm + " >> " + log;
-            File.AppendAllText(LogPath, log.ToString() + Environment.NewLine);
+            File.AppendAllText(LogPath, log.ToString() + System.Environment.NewLine);
             if (inConsole)
                 PointBlankConsole.WriteLine(log, ConsoleColor.Yellow);
         }
@@ -139,13 +154,13 @@ namespace PointBlank.API
                 if (asm == "Assembly-CSharp" || asm == "UnityEngine")
                     asm = "Game";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 asm = "Mono";
             }
 
             log = "[IMPORTANT] " + asm + " >> " + log;
-            File.AppendAllText(LogPath, log.ToString() + Environment.NewLine);
+            File.AppendAllText(LogPath, log.ToString() + System.Environment.NewLine);
             if (inConsole)
                 PointBlankConsole.WriteLine(log, ConsoleColor.Cyan);
         }

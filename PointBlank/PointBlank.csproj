@@ -33,6 +33,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\Libraries\Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="I18N.West">
       <HintPath>..\Libraries\I18N.West.dll</HintPath>
     </Reference>
@@ -133,7 +136,17 @@
     <Compile Include="Services\TaskManager\TaskManager.cs" />
     <Compile Include="Services\UpdateChecker\UpdateChecker.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Modules\PointBlank\English.dat" />
+    <None Include="Modules\PointBlank\PointBlank.module" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Modules\PointBlank\I18N.dll" />
+    <Content Include="Modules\PointBlank\I18N.West.dll" />
+    <Content Include="Modules\PointBlank\Icon.png" />
+    <Content Include="Modules\PointBlank\Newtonsoft.Json.dll" />
+    <Content Include="Modules\PointBlank\PointBlank.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

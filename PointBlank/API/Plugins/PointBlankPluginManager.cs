@@ -37,7 +37,7 @@ namespace PointBlank.API.Plugins
         /// </summary>
         public static void Reload()
         {
-            PM manager = (PM)Enviroment.services["PluginManager.PluginManager"].ServiceClass;
+            PM manager = (PM)Environment.services["PluginManager.PluginManager"].ServiceClass;
 
             manager.LoadConfig();
             foreach(PluginWrapper wrapper in PM.Plugins)

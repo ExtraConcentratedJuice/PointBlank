@@ -40,10 +40,10 @@ namespace PointBlank.Framework
             try
             {
                 if (service.Replace)
-                    foreach (ServiceWrapper wrapper in Enviroment.services.Where(a => a.Value.ServiceClass.FullName == service.FullName && a.Value.ServiceClass.Replacable).Select(a => a.Value))
+                    foreach (ServiceWrapper wrapper in Environment.services.Where(a => a.Value.ServiceClass.FullName == service.FullName && a.Value.ServiceClass.Replacable).Select(a => a.Value))
                         wrapper.Stop(); // Stop all services with the same name
                 else
-                    if (Enviroment.services.Count(a => a.Key == service.FullName) > 0)
+                    if (Environment.services.Count(a => a.Key == service.FullName) > 0)
                         return; // Make sure that the services with the same name aren't ran
 
                 new ServiceWrapper(service); // Create the service wrapper
@@ -60,7 +60,7 @@ namespace PointBlank.Framework
             {
                 wrapper.Stop(); // Stop the service
 
-                Enviroment.runtimeObjects["Services"].RemoveCodeObject(wrapper.ServiceClass.GetType().Name);
+                Environment.runtimeObjects["Services"].RemoveCodeObject(wrapper.ServiceClass.GetType().Name);
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace PointBlank.Framework
                 return;
             if (service == typeof(PointBlankService)) // Prevents the actual service API from being loaded
                 return;
-            PointBlankService ser = (PointBlankService)Enviroment.runtimeObjects["Services"].AddCodeObject(service);
+            PointBlankService ser = (PointBlankService)Environment.runtimeObjects["Services"].AddCodeObject(service);
 
             if (ServicesData.CheckKey(ser.Name))
             {
@@ -98,7 +98,7 @@ namespace PointBlank.Framework
             _tempServices.Add(ser);
         }
 
-        public void UnloadService(string name) => StopService(Enviroment.services[name]); // Unload the service using the name
+        public void UnloadService(string name) => StopService(Environment.services[name]); // Unload the service using the name
 
         public void UnloadService(ServiceWrapper wrapper) => StopService(wrapper); // Unload the service using the wrapper
 
@@ -132,7 +132,7 @@ namespace PointBlank.Framework
                 return;
 
             UniServicesData.Save(); // Save the services data
-            foreach (ServiceWrapper wrapper in Enviroment.services.Select(a => a.Value)) // Stop the services
+            foreach (ServiceWrapper wrapper in Environment.services.Select(a => a.Value)) // Stop the services
                 _tempWrappers.Add(wrapper);
             foreach (ServiceWrapper wrapper in _tempWrappers.OrderByDescending(a => a.ServiceClass.LaunchIndex))
                 StopService(wrapper);

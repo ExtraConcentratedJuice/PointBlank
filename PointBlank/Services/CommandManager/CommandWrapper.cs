@@ -41,7 +41,7 @@ namespace PointBlank.Services.CommandManager
 
             // Setup the variables
             CommandClass = (CMD)Activator.CreateInstance(Class);
-            Translations = Enviroment.ServiceTranslations[typeof(ServiceTranslations)].Translations;
+            Translations = Environment.ServiceTranslations[typeof(ServiceTranslations)].Translations;
 
             // Run the code
             Reload();

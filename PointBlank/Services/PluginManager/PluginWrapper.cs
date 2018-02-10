@@ -177,7 +177,7 @@ namespace PointBlank.Services.PluginManager
                 PointBlankLogging.Log("Starting " + Name + "...");
                 Type _class = PluginAssembly.GetTypes().First(a => a.IsClass && typeof(PointBlankPlugin).IsAssignableFrom(a)); // Get the first plugin class
 
-                PluginClass = Enviroment.runtimeObjects["Plugins"].AddCodeObject(_class) as PointBlankPlugin; // Instentate the plugin class
+                PluginClass = Environment.runtimeObjects["Plugins"].AddCodeObject(_class) as PointBlankPlugin; // Instentate the plugin class
                 Name = PluginClass.GetType().Name; // Change the name
                 Version = PluginClass.Version;
 
@@ -222,7 +222,7 @@ namespace PointBlank.Services.PluginManager
                 PluginClass.Unload(); // Run the unload function
                 PointBlankPluginEvents.RunPluginUnloaded(PluginClass); // Run the unloaded event
 
-                Enviroment.runtimeObjects["Plugins"].RemoveCodeObject(PluginClass.GetType().Name); // Remove the plugin from gameobject
+                Environment.runtimeObjects["Plugins"].RemoveCodeObject(PluginClass.GetType().Name); // Remove the plugin from gameobject
 
                 Enabled = false; // Set the enabled to false
                 t.Abort(); // Abort the thread

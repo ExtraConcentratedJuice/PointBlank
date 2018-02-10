@@ -83,7 +83,7 @@ namespace PointBlank.API.DataManagment
                 $"user id={username};password={password};server={server};Trusted_Connection={(trusted ? "yes" : "no")};database={database};connection timeout={timeout.ToString()}");
             Command.Connection = Connection; // Set the connection
 
-            Enviroment.SQLConnections.Add(this); // Add to the list
+            Environment.SQLConnections.Add(this); // Add to the list
         }
 
         #region Static Functions
@@ -311,7 +311,7 @@ namespace PointBlank.API.DataManagment
 
         private static void RunAsync()
         {
-            while (Enviroment.Running)
+            while (Environment.Running)
             {
                 while (_AsyncCommands.Count > 0)
                 {
